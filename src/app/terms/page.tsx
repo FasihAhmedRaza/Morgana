@@ -93,7 +93,7 @@ function TermsAndConditions() {
         We may terminate your access to the Website at any time, without notice, for any reason, including, but not limited to, your violation of these Terms.
       </p>
 
-      <h2 className="text-xl font-bold mt-4"  text-gray-300>IX. Governing Law</h2>
+      <h2 className="text-xl font-bold mt-4 text-gray-300">IX. Governing Law</h2>
       <p className=' text-gray-300'>
         These Terms shall be governed by and construed in accordance with the laws of the State of Texas, without regard to its conflict of law provisions.
       </p>
