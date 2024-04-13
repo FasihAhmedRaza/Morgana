@@ -2,8 +2,8 @@ import React from 'react';
 
 function Skills() {
   return (
-    <div className="lg:my-10 my-6 p-4">
-      <div className="flex flex-wrap justify-start lg:ml-40">
+    <div className="lg:py-10 bg-black  p-4 py-3  ">
+      <div className="flex flex-wrap bg-black justify-start lg:ml-40">
         {/* Skill 1 */}
         <button type="button" className="mr-2 mb-2">
           <span className="bg-white inline-flex text-black py-1 px-4 items-center justify-between text-sm capitalize border border-gray-400 rounded-full hover:bg-gray-gray1 transform transition duration-300 hover:scale-110">
@@ -80,7 +80,7 @@ function Skills() {
           </span>
         </button>
       </div>
-      <div className="flex flex-wrap justify-start lg:ml-40">
+      <div className="flex flex-wrap bg-black justify-start lg:ml-40">
         {/* Skill 9 */}
         <button type="button" className="mr-2 mb-2">
           <span className="bg-white inline-flex text-black py-1 px-4 items-center justify-between text-sm capitalize border border-gray-400 rounded-full hover:bg-gray-gray1 transform transition duration-300 hover:scale-110">

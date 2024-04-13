@@ -27,25 +27,13 @@ const CookieConsentModal = () => {
   return (
     <>
       {showModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
+        <div className="fixed mt-48 top-0  w-full h-full flex justify-end items-center z-50">
           <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
-          <div className="relative bg-white p-8 rounded-lg z-50">
-            <h2 className="text-2xl font-bold text-black mb-4">Cookie Policy</h2>
-            <p className="mb-4 text-black">This website uses cookies to ensure you get the best experience.</p>
+          <div className="relative bg-gray-800 p-8 rounded-lg z-50">
+            <h2 className="text-2xl font-bold text-white mb-4">Cookie Policy</h2>
+            <p className="mb-4 text-gray-200">This website uses cookies to ensure you get the best experience.</p>
             <div className="flex text-center text-[9px] mt-2 gap-2 py-2">
-              {/* <span className="ltr:mr-4 ltr:last:mr-0 rtl:ml-4 rtl:last:ml-0">
-                <a
-                  className="no-underline cursor-pointer shrink-0"
-                  href="/terms"
-                  style={{
-                    borderBottom: '1px solid rgb(89, 79, 253)',
-                    color: 'rgb(89, 79, 253)'
-                  }}
-                  target="_blank"
-                >
-                  Privacy policy
-                </a>
-              </span> */}
+
               <span className="ltr:mr-4 ltr:last:mr-0 rtl:ml-4 rtl:last:ml-0">
                 <a
                 href='/terms'
@@ -59,7 +47,9 @@ const CookieConsentModal = () => {
                 </a>
               </span>
             </div>
-            <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" onClick={acceptCookies}>Accept</button>
+            <button className="bg-blue-500 px-4 py-2 text-center rounded-lg 
+              transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
+             onClick={acceptCookies}>Accept</button>
           </div>
         </div>
       )}

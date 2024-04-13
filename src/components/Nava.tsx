@@ -7,7 +7,6 @@ import Signup from "@/components/Signup";
 export const FloatingNav = () => {
   // State to track whether the mobile menu is open or closed
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const [showModel, setShowModel] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 
