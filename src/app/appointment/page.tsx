@@ -4,7 +4,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
-
 const page = () => {
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
