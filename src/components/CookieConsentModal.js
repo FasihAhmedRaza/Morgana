@@ -6,6 +6,7 @@ const CookieConsentModal = () => {
 
   useEffect(() => {
     const hasAcceptedCookies = localStorage.getItem('hasAcceptedCookies');
+    
     if (!hasAcceptedCookies) {
       setShowModal(true);
       document.body.style.overflow = 'hidden'; // Disable scrolling
@@ -27,29 +28,30 @@ const CookieConsentModal = () => {
   return (
     <>
       {showModal && (
-        <div className="fixed mt-48 top-0  w-full h-full flex justify-end items-center z-50">
-          <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
-          <div className="relative bg-gray-800 p-8 rounded-lg z-50">
-            <h2 className="text-2xl font-bold text-white mb-4">Cookie Policy</h2>
-            <p className="mb-4 text-gray-200">This website uses cookies to ensure you get the best experience.</p>
-            <div className="flex text-center text-[9px] mt-2 gap-2 py-2">
-
-              <span className="ltr:mr-4 ltr:last:mr-0 rtl:ml-4 rtl:last:ml-0">
-                <a
+        <div className="fixed bottom-0 mx-5 my-4   inset-x-0 bg-black bg-opacity-50 z-50">
+          <div className="max-w-screen-xll w-full bg-gray-800 rounded-t-xl rounded-b-xl p-8">
+            {/* <h2 className="text-2xl font-bold text-white mb-4">Cookie Policy</h2> */}
+            <p className="mb-4 text-gray-200">
+              This website uses cookies to enhance your browsing experience,
+              analyze site traffic, and serve better user experiences. By continuing to use this site, you consent to our use of
+              cookies. Learn more in our  <a
                 href='/terms'
-                  className="no-underline cursor-pointer shrink-0"
-                  style={{
-                    borderBottom: '1px solid rgb(89, 79, 253)',
-                    color: 'rgb(89, 79, 253)'
-                  }}
-                >
-                  Cookie policy
-                </a>
-              </span>
+                className="no-underline cursor-pointer shrink-0 text-blue-500 "
+              >
+                {/* Cookie policy */}
+    
+              </a>
+            </p>
+
+            <div className="flex justify-end gap-4">
+              <button className="bg-blue-500 px-4 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm" onClick={acceptCookies}>
+                Only Essential
+              </button>
+              <button className="bg-blue-500 px-4 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm" onClick={acceptCookies}>
+                Accept
+              </button>
+
             </div>
-            <button className="bg-blue-500 px-4 py-2 text-center rounded-lg 
-              transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
-             onClick={acceptCookies}>Accept</button>
           </div>
         </div>
       )}
