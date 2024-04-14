@@ -34,13 +34,14 @@ const CookieConsentModal = () => {
             <p className="mb-4 text-gray-200">
               This website uses cookies to enhance your browsing experience,
               analyze site traffic, and serve better user experiences. By continuing to use this site, you consent to our use of
-              cookies. Learn more in our  <a
+              cookies. Learn more in our 
+               <Link
                 href='/terms'
                 className="no-underline cursor-pointer shrink-0 text-blue-500 "
               >
                 Cookie policy 
     
-              </a>
+              </Link>
             </p>
 
             <div className="flex ml-10  justify-start gap-4">

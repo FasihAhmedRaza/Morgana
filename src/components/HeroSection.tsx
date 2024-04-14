@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
+import Link from "next/link";
 
 const words = `We specialize in crafting tailored strategies designed to propel
 people toward a brighter future. One strategy at a time.
@@ -38,16 +39,16 @@ const HeroSection = () => {
               
                 className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white"
               >
-                <a href="/login">Get started</a>
+                <Link href="/login">Get started</Link>
                 
               </button>
               
-              <a
+              <Link
                 href="/about"
                 className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-yellow-600 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white"
               >
                 Learn More
-              </a>
+              </Link>
             </div>
           </div>
           <div className="hidden sm:block sm:w-2/3 lg:w-3/5 relative md:mb-0 z-0">

@@ -1,4 +1,6 @@
+'use client'
 import React from 'react'
+import Link from 'next/link'
 
 const page = () => {
     return (
@@ -12,12 +14,12 @@ const page = () => {
                             </h2>
                             <p className="mt- text-sm text-center text-gray-600 dark:text-gray-400">
                                 Remember your password? {" "}
-                                <a href="/login"
+                                <Link href="/login"
 
                                     className="font-medium text-blue-500 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                                     Login here
 
-                                </a>
+                                </Link>
 
                             </p>
                         </div>
