@@ -1,4 +1,17 @@
 import React from 'react';
+import { Button } from './ui/button';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import Dashboard from './Dashboard';
+
 
 function Skills() {
   return (
@@ -117,7 +130,7 @@ function Skills() {
             <span className="capitalize lg:inline leading-5">YouTube Content Creation</span>
           </span>
         </button>
-        {/* Add more skills similarly */}
+        {/* <button><a href="">booking Dashboard <Dashboard/> </a>  </button> */}
       </div>
     </div>
   );

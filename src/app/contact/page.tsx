@@ -54,9 +54,8 @@ function MusicSchoolContactUs() {
             placeholder="Your address"
             className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-gray-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700 text-white"
           />
-          <div className="grid grid-cols-2 gap-4">
-            {/* COUNTRY SECTION */}
-            <select
+           {/* COUNTRY SECTION */}
+           <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-gray-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700 text-white"
@@ -313,6 +312,8 @@ function MusicSchoolContactUs() {
 
 
             </select>
+          <div className="grid grid-cols-2 gap-4">
+           
 
             {/* City Section */}
             <input

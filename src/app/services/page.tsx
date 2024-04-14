@@ -78,7 +78,7 @@ const Pricing = () => {
           className="block w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
           href="#"
         >
-          Contact Sales
+          Get Started
         </a>
       </div>
       <div className="bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">
@@ -161,7 +161,7 @@ const Pricing = () => {
           className="block w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
           href="#"
         >
-          Contact Sales
+         Get Started
         </a>
       </div>
       <div className="bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">
@@ -244,7 +244,7 @@ const Pricing = () => {
           className="block w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
           href="#"
         >
-          Contact Sales
+          Get Started
         </a>
       </div>
       <div className="bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">

@@ -35,12 +35,13 @@ const HeroSection = () => {
             </p>
             <div className="flex mt-8 gap-4">
               <button
-                onClick={handleGetStartedClick}
+              
                 className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white"
               >
-                Get started
+                <a href="/login">Get started</a>
+                
               </button>
-              {showModel && <Login onClose={() => setShowModel(false)} />}
+              
               <a
                 href="/about"
                 className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-yellow-600 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white"

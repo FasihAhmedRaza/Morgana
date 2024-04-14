@@ -33,20 +33,22 @@ export const FloatingNav = () => {
           {/* --------------LOGIN BUTTON ---- */}
 
           <div className="place-self-end px-2">
-            <button
-              onClick={() => setShowModel(true)}
+            <a href="/login">
+            <button     
               className='bg-blue-500 px-4 py-2 text-center rounded-lg 
               transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm'>
                 Login</button>
-            {showModel && <Login onClose={() => setShowModel(false)} />}
+                </a>
           </div>
 
           {/*----------------- Signup BUTTON ---- */}
           <div className="place-self-end">
+          <a href="/signup">
             <button
-              onClick={() => setShowSignup(true)}
-              className='bg-blue-500 px-2 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm'>Sign up</button>
-            {showSignup && <Signup onClose={() => setShowSignup(false)} />}
+              className='bg-blue-500 px-2 py-2 text-center rounded-lg 
+              transition duration-300 ease-in-out hover:bg-gray-600
+               text-white text-sm'>Sign up</button>
+           </a>
           </div>
 
           <button
