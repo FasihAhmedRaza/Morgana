@@ -38,20 +38,20 @@ const CookieConsentModal = () => {
                 href='/terms'
                 className="no-underline cursor-pointer shrink-0 text-blue-500 "
               >
-                {/* Cookie policy */}
+                Cookie policy 
     
               </a>
             </p>
 
-            <div className="flex justify-end gap-4">
-              <button className="bg-blue-500 px-4 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm" onClick={acceptCookies}>
-                Only Essential
-              </button>
-              <button className="bg-blue-500 px-4 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm" onClick={acceptCookies}>
-                Accept
-              </button>
+            <div className="flex ml-10  justify-start gap-4">
+  <button className="bg-blue-500 px-4 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm" onClick={acceptCookies}>
+    Only Essential
+  </button>
+  <button className="bg-blue-500 px-4 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm" onClick={acceptCookies}>
+    Accept
+  </button>
+</div>
 
-            </div>
           </div>
         </div>
       )}
