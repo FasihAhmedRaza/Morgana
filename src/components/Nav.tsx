@@ -17,13 +17,13 @@ export const FloatingNav = () => {
   return (
     <nav className="bg-blue-400 border-gray-200 py-2.5 dark:bg-black sticky top-0 z-50">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-        <a href="/" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <img
             src="courses/logo.png"
             className="h-6 mr-3 sm:h-9"
             alt="Landwind Logo"
           />
-        </a>
+        </Link>
         <div className="flex items-center lg:order-2">
           <div className="hidden mt-2 mr-4 sm:inline-block">
             <span />
@@ -31,6 +31,7 @@ export const FloatingNav = () => {
 
           {/* --------------LOGIN BUTTON ---- */}
 
+<<<<<<< HEAD
           {!isAuth && (
             <div>
               <div className="place-self-end px-2">
@@ -71,6 +72,31 @@ export const FloatingNav = () => {
               </Link>
             </div>
           )}
+=======
+          <div className="place-self-end px-2">
+            <Link href="/login">
+              <button
+                className="bg-blue-500 px-4 py-2 text-center rounded-lg 
+              transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
+              >
+                Login
+              </button>
+            </Link>
+          </div>
+
+          {/*----------------- Signup BUTTON ---- */}
+          <div className="place-self-end">
+            <Link href="/signup">
+              <button
+                className="bg-blue-500 px-2 py-2 text-center rounded-lg 
+              transition duration-300 ease-in-out hover:bg-gray-600
+               text-white text-sm"
+              >
+                Sign up
+              </button>
+            </Link>
+          </div>
+>>>>>>> 6f1bd39 (feat: password and reset password)
 
           <button
             onClick={toggleMobileMenu} // Add onClick handler to toggle the mobile menu
