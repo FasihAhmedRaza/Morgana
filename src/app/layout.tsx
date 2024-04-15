@@ -27,10 +27,8 @@ export default function RootLayout({
         <FloatingNav/>
         {children}
       </div>
-      <CookieConsentModal/>
-      {/* Footer Component */}
-
       <Footer/>
+      <CookieConsentModal/>
     </body>
   </html>
   );
