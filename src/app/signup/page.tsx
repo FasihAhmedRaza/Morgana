@@ -58,7 +58,7 @@ const Signup = () => {
                              <input className="h-4 w-4  rounded-md border-spacing-2 border-gray-300 focus:ring-indigo-500 text-indigo-600" required type="checkbox" />
                          
                                {" "} I accept the{' '}
-                                <Link className="text-primary-600 text-gray-100 hover:text-primary-700" href="/terms" target="_blank">
+                                <Link className="text-primary-600 text-gray-100 hover:text-primary-700" href="/terms" >
                                     Terms and Conditions
                                 </Link>
                             </span>

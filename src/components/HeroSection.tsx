@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Login from "./Login";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
 import Link from "next/link";
+import { BackgroundBeams } from './ui/background-beams'
 
 const words = `We specialize in crafting tailored strategies designed to propel
 people toward a brighter future. One strategy at a time.
