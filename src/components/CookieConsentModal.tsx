@@ -4,14 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const CookieConsentModal = () => {
-  const [consentGiven, setConsentGiven] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(true);
 
   useEffect(() => {
     const hasAcceptedCookies = localStorage.getItem("cookie_consent");
     if (!hasAcceptedCookies) {
       setConsentGiven(false);
-    } else {
-      setConsentGiven(true);
     }
   }, []);
 
@@ -28,8 +26,8 @@ const CookieConsentModal = () => {
   return (
     <>
       {!consentGiven && (
-        <div className="pointer-events-none fixed inset-x-0  bottom-0 z-50">
-          <div className="pointer-events-auto w-full bg-gray-800 text-white p-6 shadow-lg ring-2">
+        <div className="fixed inset-x-0 bottom-0 z-50">
+          <div className="w-full bg-gray-800 text-white p-6 shadow-lg ring-2">
             <p className="text-sm leading-6">
               This website uses cookies to supplement a balanced diet and
               provide a much deserved reward to the senses after consuming bland
