@@ -1,15 +1,17 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import Login from '@/components/Login'
+import Login from "@/components/Login";
 import Signup from "@/components/Signup";
 import Link from "next/link";
+import useAuthStore from "../lib/authStore";
 
 export const FloatingNav = () => {
   // State to track whether the mobile menu is open or closed
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showModel, setShowModel] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const { isAuth } = useAuthStore();
 
   // Function to toggle the mobile menu
   const toggleMobileMenu = () => {
@@ -30,27 +32,49 @@ export const FloatingNav = () => {
           <div className="hidden mt-2 mr-4 sm:inline-block">
             <span />
           </div>
-        
+
           {/* --------------LOGIN BUTTON ---- */}
 
-          <div className="place-self-end px-2">
-          <Link href="/login">
-            <button     
-              className='bg-blue-500 px-4 py-2 text-center rounded-lg 
-              transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm'>
-                Login</button>
-               </Link>
-          </div>
+          {!isAuth && (
+            <div>
+              <div className="place-self-end px-2">
+                <Link href="/login">
+                  <button
+                    className="bg-blue-500 px-4 py-2 text-center rounded-lg 
+          transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
+                  >
+                    Login
+                  </button>
+                </Link>
+              </div>
 
-          {/*----------------- Signup BUTTON ---- */}
-          <div className="place-self-end">
-          <Link href="/signup">
-            <button
-              className='bg-blue-500 px-2 py-2 text-center rounded-lg 
-              transition duration-300 ease-in-out hover:bg-gray-600
-               text-white text-sm'>Sign up</button>
-           </Link>
-          </div>
+              <div className="place-self-end">
+                <Link href="/signup">
+                  <button
+                    className="bg-blue-500 px-2 py-2 text-center rounded-lg 
+          transition duration-300 ease-in-out hover:bg-gray-600
+           text-white text-sm"
+                  >
+                    Sign up
+                  </button>
+                </Link>
+              </div>
+            </div>
+          )}
+
+{/* Is ko change karke apni logut wali functionality laga liye ga */}
+          {isAuth && (
+            <div className="place-self-end px-2">
+              <Link href="/login">
+                <button
+                  className="bg-blue-500 px-4 py-2 text-center rounded-lg 
+          transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
+                >
+                  Sign Out
+                </button>
+              </Link>
+            </div>
+          )}
 
           <button
             onClick={toggleMobileMenu} // Add onClick handler to toggle the mobile menu
@@ -62,7 +86,7 @@ export const FloatingNav = () => {
           >
             <span className="sr-only">Open main menu</span>
             <svg
-              className={`w-6 h-6 ${isMobileMenuOpen ? 'hidden' : ''}`} // Hide the open menu icon if menu is open
+              className={`w-6 h-6 ${isMobileMenuOpen ? "hidden" : ""}`} // Hide the open menu icon if menu is open
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +98,7 @@ export const FloatingNav = () => {
               />
             </svg>
             <svg
-              className={`w-6 h-6 ${isMobileMenuOpen ? '' : 'hidden'}`} // Hide the closed menu icon if menu is closed
+              className={`w-6 h-6 ${isMobileMenuOpen ? "" : "hidden"}`} // Hide the closed menu icon if menu is closed
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +112,9 @@ export const FloatingNav = () => {
           </button>
         </div>
         <div
-          className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMobileMenuOpen ? '' : 'hidden'}`} // Hide the menu items if menu is closed
+          className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${
+            isMobileMenuOpen ? "" : "hidden"
+          }`} // Hide the menu items if menu is closed
           id="mobile-menu-2"
         >
           <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
