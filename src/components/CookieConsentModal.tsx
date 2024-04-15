@@ -8,7 +8,6 @@ const CookieConsentModal = () => {
   const [showCustomize, setShowCustomize] = useState(false);
   const [selectedCookies, setSelectedCookies] = useState({
     functional: true,
-    performance: false,
     analytics: false,
   });
 
