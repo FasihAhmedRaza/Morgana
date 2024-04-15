@@ -1,16 +1,12 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import Login from "@/components/Login";
-import Signup from "@/components/Signup";
 import Link from "next/link";
 import useAuthStore from "../lib/authStore";
 
 export const FloatingNav = () => {
   // State to track whether the mobile menu is open or closed
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showModel, setShowModel] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
   const { isAuth } = useAuthStore();
 
   // Function to toggle the mobile menu
