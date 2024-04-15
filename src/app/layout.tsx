@@ -1,5 +1,5 @@
 import Footer from "@/components/Footer";
-import { FloatingNav } from "@/components/Nava";
+import { FloatingNav } from "@/components/Nav";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
