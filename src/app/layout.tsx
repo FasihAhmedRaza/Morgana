@@ -1,11 +1,9 @@
+import Footer from "@/components/Footer";
+import { FloatingNav } from "@/components/Nav";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { FloatingNav } from "@/components/Nava";
-import Footer from "@/components/Footer";
-import  CookieConsentModal  from "@/components/CookieConsentModal";
-import CalendarModal from "@/components/Calender";
-import Link from "next/link";
+import CookieConsentModal from "@/components/CookieConsentModal";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,10 +25,8 @@ export default function RootLayout({
         <FloatingNav/>
         {children}
       </div>
-      <CookieConsentModal/>
-      {/* Footer Component */}
-
       <Footer/>
+      <CookieConsentModal/>
     </body>
   </html>
   );

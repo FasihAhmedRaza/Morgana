@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { TextGenerateEffect } from "./ui/text-generate-effect";
 import Link from "next/link";
-import { BackgroundBeams } from './ui/background-beams'
+import { useEffect, useState } from "react";
+import { TextGenerateEffect } from "./ui/text-generate-effect";
 
 const words = `We specialize in crafting tailored strategies designed to propel
 people toward a brighter future. One strategy at a time. Our mission is to empower clients with AI-driven insights and 
@@ -30,20 +29,18 @@ const HeroSection = () => {
           <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20 lg:ml-40">
             <h1 className="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white text-gray-800">
               MORGANA
-              <span className="text-4xl sm:text-4xl text-blue-500">VALUE FOR THE FUTURE</span>
+              <span className="text-4xl sm:text-4xl text-blue-500">
+                VALUE FOR THE FUTURE
+              </span>
             </h1>
             <p className="text-sm sm:text-base mt-5">
               {isClient && <TextGenerateEffect words={words} />}
             </p>
             <div className="flex mt-8 gap-4">
-              <button
-              
-                className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white"
-              >
+              <button className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white">
                 <Link href="/login">Get started</Link>
-                
               </button>
-              
+
               <Link
                 href="/about"
                 className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-yellow-600 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white"
@@ -56,7 +53,7 @@ const HeroSection = () => {
             <img
               src="/courses/bg.png"
               className="max-w-lg md:max-w-xl m-auto -mt-40"
-              style={{ animation: 'slide 5s infinite alternate' }} // Inline style for animation
+              style={{ animation: "slide 5s infinite alternate" }} // Inline style for animation
               alt="Background"
             />
           </div>
