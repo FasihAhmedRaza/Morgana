@@ -1,7 +1,7 @@
 'use client';
 import React, { FormEvent, useState } from 'react';
 import Footer from '@/components/Footer';
-function MusicSchoolContactUs() {
+function ContactUs() {
   const [name, setName] = useState('');
   const [organization, setOrganization] = useState('');
   const [address, setAddress] = useState('');
@@ -352,6 +352,7 @@ function MusicSchoolContactUs() {
           <button
             type="submit"
             className="px-6 py-2 rounded-lg bg-blue-500 text-white font-medium hover:bg-gray-600"
+          
           >
             Send Message
           </button>
@@ -366,4 +367,4 @@ function MusicSchoolContactUs() {
   );
 }
 
-export default MusicSchoolContactUs;
+export default ContactUs;

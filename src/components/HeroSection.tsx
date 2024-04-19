@@ -4,7 +4,8 @@ import Link from "next/link";
 import { BackgroundBeams } from './ui/background-beams'
 
 const words = `We specialize in crafting tailored strategies designed to propel
-people toward a brighter future. One strategy at a time.
+people toward a brighter future. One strategy at a time. Our mission is to empower clients with AI-driven insights and 
+technology, enabling them to thrive in the digital age and create value for the future.
 `;
 
 const HeroSection = () => {

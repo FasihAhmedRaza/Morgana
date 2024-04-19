@@ -41,34 +41,35 @@ export const Highlight = ({
 const CARDS = [
   {
     id: 0,
-    name: "Zues",
-    designation: "Chairman and CEO of Morgana",
+    name: "Maurice T.",
+    designation: "Data Scientist",
     content: (
-      <p>
+      <p >
         Has over<Highlight>5 years</Highlight> of professional
         experience as a Data Scientist.
       </p>
     ),
   },
+  
   {
     id: 1,
-    name: "Hades",
-    designation: "Chief Operations Officer of Morgana",
+    name: "Max D.",
+    designation: "Software Developer and Machine Learning Engineer",
     content: (
       <p>
-        <Highlight>15+ years</Highlight>
+         Has over<Highlight>10 years</Highlight>
         of developing custom software and machine learning solutions experience.
       </p>
     ),
   },
   {
     id: 2,
-    name: "Poseidon",
-    designation: "Chief Technology Officer of Morgana",
+    name: "Elliot A.",
+    designation: "Software Engineer and Machine Learning Specialist",
     content: (
       <p>
-        <Highlight>Poseidon </Highlight> with
-        <Highlight> over 10 years </Highlight> experience in custom software development.
+       
+       Has over<Highlight>5 years </Highlight>  experience in custom software development.
       </p>
     ),
   },

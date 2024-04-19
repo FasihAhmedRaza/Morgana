@@ -5,40 +5,6 @@ import { useState, useEffect } from 'react';
 function AboutUs() {
   // Data for each team member
   const teamMembers = [
-    {
-      name: "Zeus",
-      role: "Chairman and CEO",
-      bio: "Texas Tech alumnus with a Master of Business Administration and a Master of Science in Data Science. Over 5 years of professional experience as a Data Scientist building data science systems for the public and private sector. Specializes in Data Science, Business Administration, AI Consulting, and Licensing Solutions.",
-      skills: [
-        "Data Science",
-        "Business Administration",
-        "AI Consulting",
-        "Licensing Solutions"
-      ]
-    },
-    {
-      name: "Hades",
-      role: "Chief Operations Officer",
-      bio: "Bringing over 15 years of experience in developing custom software and machine learning solutions, Maurice T., a Texas Tech alumnus with an MBA and an M.S. in Data Science, has expertise in real estate, blockchain technology, and machine learning.",
-      skills: [
-        "Software Development",
-        "Machine Learning",
-        "Real Estate",
-        "Blockchain Technology"
-      ]
-    },
-    {
-      name: "Poseidon",
-      role: "Chief Technology Officer",
-      bio: "With over 10 years of experience in developing custom software and PyTorch Large Language Models, Max D. provides educational content on developing Large Language Models through courses and YouTube videos. His expertise lies in Software Development, PyTorch, Large Language Models, Course Development, and YouTube Content Creation.",
-      skills: [
-        "Software Development",
-        "PyTorch",
-        "Large Language Models",
-        "Course Development",
-        "YouTube Content Creation"
-      ]
-    },
 
     {
       name: "Maurice T.",
@@ -97,7 +63,7 @@ function AboutUs() {
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="mb-12">
           <h1 className="text-3xl md:text-5xl text-center font-bold mb-4 text-gray-100">About Us</h1>
-          <h2 className="text-4xl md:text-2xl  mt-20 text-center  font-bold mb-4 text-gray-300">Our Mission</h2>
+          <h2 className="text-4xl md:text-2xl  lg:text-3xl mt-20 text-center  font-bold mb-4 text-blue-600">Our Mission</h2>
           <p className="text-md text-center mt-5 text-gray-200">{missionStatement}</p>
           {/* <p className="text-lg text-center mt-4 text-gray-800">{visionStatement}</p> */}
         </div>
