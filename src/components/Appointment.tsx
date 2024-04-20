@@ -5,12 +5,17 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CountriesDropdown from "./CountriesDropDown";
+import isAuth from "./IsAuth";
 import Table from "./Table";
 
 const Appointment = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [data, setData] = useState<any[]>([]);
   const [selectedCountry, setSelectedCountry] = useState("");
+
+  useEffect(() => {
+    setData([])
+  }, [])
 
   const handleCountryChange = (e: any) => {
     setSelectedCountry(e.target.value);
@@ -46,16 +51,6 @@ const Appointment = () => {
     console.log("Selected Option:", selectedOption);
   };
 
-  useEffect(() => {
-    // setData([
-    //   { id: "1sdsd1" },
-    //   { id: "1sdsd2" },
-    //   { id: "1sdsd3" },
-    //   { id: "1sdsd4" },
-    //   { id: "1sdsd5" },
-    // ]);
-  });
-
   return (
     <div className="flex overflow-x-hidden">
       <div className="w-1/2 p-2 min-h-screen">
@@ -87,7 +82,7 @@ const Appointment = () => {
                   ? "Select Time Slot"
                   : "Please pick a date to choose a time slot"}
               </label>
-              {data.map((item) => (
+              {data?.map((item) => (
                 <div key={item.id}>
                   <input
                     type="radio"
@@ -163,4 +158,4 @@ const Appointment = () => {
   );
 };
 
-export default Appointment;
+export default isAuth(Appointment);

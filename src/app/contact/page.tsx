@@ -1,7 +1,7 @@
 "use client";
-import React, { FormEvent, useState } from "react";
-import Footer from "@/components/Footer";
+
 import CountriesDropdown from "@/components/CountriesDropDown";
+import { FormEvent, useState } from "react";
 function MusicSchoolContactUs() {
   const [name, setName] = useState("");
   const [organization, setOrganization] = useState("");
@@ -28,12 +28,10 @@ function MusicSchoolContactUs() {
   };
 
   return (
-    <div className="min-h-screen bg-black dark:bg-black py-12 pt-5 relative">
-      {/* Ensure the container is relative */}
-      {/* BackgroundBeams with adjusted z-index */}
+    <div className="bg-black dark:bg-black py-12 pt-5">
 
       {/* Content with higher z-index */}
-      <div className="max-w-2xl mx-auto p-4  mt-50 relative z-10">
+      <div className="max-w-2xl mx-auto p-4  mt-50">
         {/* Add relative and z-10 to bring content to the front */}
         <h1 className="text-lg md:text-7xl text-center font-sans mt-12 font-bold mb-8 text-white">
           Contact Us
@@ -111,10 +109,6 @@ function MusicSchoolContactUs() {
             Send Message
           </button>
         </form>
-      </div>
-
-      <div className="fixed bottom-0 w-full">
-        <Footer />
       </div>
     </div>
   );

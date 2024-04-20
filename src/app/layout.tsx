@@ -1,10 +1,10 @@
+import CookieConsentModal from "@/components/CookieConsentModal";
 import Footer from "@/components/Footer";
 import { FloatingNav } from "@/components/Nav";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import CookieConsentModal from "@/components/CookieConsentModal";
-
+import ToastProvider from "@/components/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark bg-black">
-    <body className={inter.className}>
-      <div>
-        <FloatingNav/>
-        {children}
-      </div>
-      <Footer/>
-      <CookieConsentModal/>
-    </body>
-  </html>
+      <body className={inter.className}>
+        <ToastProvider>
+          <FloatingNav />
+          {children}
+          <Footer />
+          <CookieConsentModal />
+        </ToastProvider>
+      </body>
+    </html>
   );
 }

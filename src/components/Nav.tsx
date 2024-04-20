@@ -1,45 +1,29 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { SlArrowDown } from "react-icons/sl";
 import {
   TEDropdown,
   TEDropdownItem,
   TEDropdownMenu,
-  TEDropdownToggle
+  TEDropdownToggle,
 } from "tw-elements-react";
 import useAuthStore from "../lib/authStore";
 
 export const FloatingNav = () => {
-  // State to track whether the mobile menu is open or closed
-  const { isAuth } = useAuthStore();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isOpenProfileDropdown, setIsOpenProfileDropdown] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const { isAuth, removeUserAuthentication } = useAuthStore();
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpenProfileDropdown(false);
-      }
-    };
+    setIsUserLoggedIn(isAuth)
+  }, [isAuth]);
 
-    const handleDocumentClick = (event: MouseEvent) => {
-      handleClickOutside(event);
-    };
-
-    document.addEventListener("mousedown", handleDocumentClick);
-
-    return () => {
-      document.removeEventListener("mousedown", handleDocumentClick);
-    };
-  }, [isOpenProfileDropdown]);
-
-  const toggleProfileDropdown = () => {
-    setIsOpenProfileDropdown(!isOpenProfileDropdown);
+  const logoutSuccess = () => {
+    removeUserAuthentication();
+    router.push("/login");
   };
 
   const toggleMobileMenu = () => {
@@ -57,13 +41,35 @@ export const FloatingNav = () => {
           />
         </Link>
         <div className="flex items-center lg:order-2">
-          <div className="hidden mt-2 mr-4 sm:inline-block">
-            <span />
-          </div>
-
           {/* --------------LOGIN BUTTON ---- */}
 
-          {!isAuth ? (
+          {isUserLoggedIn ? (
+            <TEDropdown className="flex justify-center bg-blue-500 hover:bg-gray-600 text-white rounded">
+              <TEDropdownToggle className="flex whitespace-nowrap font-medium rounded focus:outline-none focus:ring-0 text-sm px-4 py-2.5 text-center items-center justify-between">
+                <span className="mr-1">Account</span>
+                <SlArrowDown />
+              </TEDropdownToggle>
+
+              <TEDropdownMenu className="bg-[#0000FF] border-[#0000FF] mt-1">
+                <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
+                  <Link
+                    href="/appointment"
+                    className="bg-gray-900 block w-full min-w-[160px] cursor-pointer whitespace-nowrap px-4 py-2 text-sm text-left font-normal pointer-events-auto"
+                  >
+                    Appointment
+                  </Link>
+                </TEDropdownItem>
+                <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
+                  <button
+                    className="bg-gray-900 block w-full min-w-[160px] cursor-pointer whitespace-nowrap px-4 py-2 text-sm text-left font-normal pointer-events-auto"
+                    onClick={logoutSuccess}
+                  >
+                    Sign Out
+                  </button>
+                </TEDropdownItem>
+              </TEDropdownMenu>
+            </TEDropdown>
+          ) : (
             <div className="flex flex-row justify-between">
               <div className="place-self-end px-2">
                 <Link
@@ -83,33 +89,10 @@ export const FloatingNav = () => {
                 </Link>
               </div>
             </div>
-          ) : (
-            <TEDropdown className="flex justify-center bg-blue-500 hover:bg-gray-600 text-white rounded">
-              <TEDropdownToggle className="flex whitespace-nowrap font-medium rounded focus:outline-none focus:ring-0 text-sm px-4 py-2.5 text-center items-center justify-between">
-                <span className="mr-1">Account</span>
-                <SlArrowDown />
-              </TEDropdownToggle>
-
-              <TEDropdownMenu className="bg-[#000000] mt-1">
-                <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
-                  <Link
-                    href="/appointment"
-                    className="bg-gray-900 block w-full min-w-[160px] cursor-pointer whitespace-nowrap px-4 py-2 text-sm text-left font-normal pointer-events-auto"
-                  >
-                    Appointment
-                  </Link>
-                </TEDropdownItem>
-                <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
-                  <button className="bg-gray-900 block w-full min-w-[160px] cursor-pointer whitespace-nowrap px-4 py-2 text-sm text-left font-normal pointer-events-auto">
-                    Sign Out
-                  </button>
-                </TEDropdownItem>
-              </TEDropdownMenu>
-            </TEDropdown>
           )}
 
           <button
-            onClick={toggleMobileMenu} // Add onClick handler to toggle the mobile menu
+            onClick={toggleMobileMenu}
             data-collapse-toggle="mobile-menu-2"
             type="button"
             className="inline-flex items-center p-2 ml-1 text-sm text-black rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

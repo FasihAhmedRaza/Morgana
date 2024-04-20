@@ -1,16 +1,25 @@
 "use client";
-import axios from "axios";
+import { API_LOGIN } from "@/constants/api";
+import apiService from "@/utils/apiService";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthStore from "../lib/authStore";
-import { API_BASE_URL, API_LOGIN } from "@/constants/api";
+import { errorMessage, successMessage } from "@/utils/toastMessages";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
+  const { setUserAuthentication, isAuth } = useAuthStore();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const { setUserAuthentication } = useAuthStore();
+
+  useEffect(() => {
+    if (isAuth) {
+      router.push("/appointment");
+    }
+  }, [isAuth]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -24,12 +33,15 @@ const Login = () => {
     e.preventDefault();
     console.log("Form Data:", formData);
     try {
-      const res = await axios.post(`${API_BASE_URL}${API_LOGIN}`, formData);
-      console.log("the res is ", res?.data?.data);
-      alert("The user is logged in successfully");
-      setUserAuthentication(res?.data?.data);
+      const result = await apiService.post(API_LOGIN, formData);
+      console.log("the res is ", result?.data);
+      successMessage("Logged in successfully");
+      setUserAuthentication(result?.data?.data);
     } catch (error) {
-      console.error("Error occured");
+      console.error("Error occurred:", error);
+      errorMessage(
+        "Failed to login. Please check your credentials and try again."
+      );
     }
   };
 
