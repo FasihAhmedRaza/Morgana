@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
 import useAuthStore from "../lib/authStore";
+import { API_BASE_URL, API_LOGIN } from "@/constants/api";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,10 +24,7 @@ const Login = () => {
     e.preventDefault();
     console.log("Form Data:", formData);
     try {
-      const res = await axios.post(
-        "https://api.dev.contactly.online/v1/admins/auth/login",
-        formData
-      );
+      const res = await axios.post(`${API_BASE_URL}${API_LOGIN}`, formData);
       console.log("the res is ", res?.data?.data);
       alert("The user is logged in successfully");
       setUserAuthentication(res?.data?.data);
