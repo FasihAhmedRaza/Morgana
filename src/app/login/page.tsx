@@ -1,15 +1,47 @@
 "use client";
-import React from "react";
+import axios from "axios";
 import Link from "next/link";
+import React, { useState } from "react";
+import useAuthStore from "../../lib/authStore";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { setUserAuthentication } = useAuthStore();
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+    try {
+      const res = await axios.post(
+        "https://api.dev.contactly.online/v1/admins/auth/login",
+        formData
+      );
+      console.log("the res is ", res?.data?.data);
+      alert("The user is logged in successfully");
+      setUserAuthentication(res?.data?.data);
+    } catch (error) {
+      console.error("Error occured");
+    }
+  };
+
   return (
     <div className="bg-black min-h-screen flex items-center justify-center">
-      <div className="bg-gray-900 rounded-xl px-16 py-14 flex flex-col gap-2 items-center mx-4 max-w-xl w-full">
+      <div className="bg-gray-900 rounded-xl px-20 py-14 flex flex-col gap-2 items-center mx-4 max-w-xl w-full">
         <h2 className="text-2xl text-center font-bold pb-5 text-white">
-          Login To Your Account
+          Login to your account
         </h2>
-        <form className="w-full">
+        <form className="w-full" onSubmit={handleSubmit}>
           <div className="mb-3">
             <label
               className="block py-2 text-sm font-medium leading-5 text-gray-200"
@@ -19,7 +51,9 @@ const Login = () => {
             </label>
             <input
               className="bg-gray-100 text-base py-3 px-6 border border-gray-300 leading-7 text-gray-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
-              defaultValue=""
+              value={formData.email}
+              onChange={handleChange}
+              name="email"
               id="email"
               placeholder="Your email address"
               required
@@ -27,7 +61,7 @@ const Login = () => {
             />
           </div>
           {/* Password field */}
-          <div className="mb-3">
+          <div className="mb-4">
             <label
               className="block py-2 text-sm font-medium leading-5 text-gray-200"
               htmlFor="password"
@@ -36,7 +70,9 @@ const Login = () => {
             </label>
             <input
               className="bg-gray-100 leading-7 border border-gray-300 text-gray-900 text-base py-3 px-6 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
-              defaultValue=""
+              value={formData.password}
+              onChange={handleChange}
+              name="password"
               id="password"
               placeholder="Your password"
               required
@@ -47,8 +83,8 @@ const Login = () => {
           <div className="flex flex-col space-y-2">
             <label className="font-medium text-gray-400 flex items-start space-x-2">
               <Link
-                className="text-blue-500 hover:text-primary-700"
                 href="/forgot"
+                className="text-blue-500 hover:text-primary-700"
               >
                 Forgot your password?
               </Link>

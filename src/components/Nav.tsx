@@ -2,10 +2,12 @@
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
+import useAuthStore from "../lib/authStore";
 
 export const FloatingNav = () => {
   // State to track whether the mobile menu is open or closed
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isAuth } = useAuthStore();
 
   // Function to toggle the mobile menu
   const toggleMobileMenu = () => {
@@ -29,29 +31,46 @@ export const FloatingNav = () => {
 
           {/* --------------LOGIN BUTTON ---- */}
 
-          <div className="place-self-end px-2">
-            <Link href="/login">
-              <button
-                className="bg-blue-500 px-4 py-2 text-center rounded-lg 
-              transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
-              >
-                Login
-              </button>
-            </Link>
-          </div>
+          {!isAuth && (
+            <div>
+              <div className="place-self-end px-2">
+                <Link href="/login">
+                  <button
+                    className="bg-blue-500 px-4 py-2 text-center rounded-lg 
+          transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
+                  >
+                    Login
+                  </button>
+                </Link>
+              </div>
 
-          {/*----------------- Signup BUTTON ---- */}
-          <div className="place-self-end">
-            <Link href="/signup">
-              <button
-                className="bg-blue-500 px-2 py-2 text-center rounded-lg 
-              transition duration-300 ease-in-out hover:bg-gray-600
-               text-white text-sm"
-              >
-                Sign up
-              </button>
-            </Link>
-          </div>
+              <div className="place-self-end">
+                <Link href="/signup">
+                  <button
+                    className="bg-blue-500 px-2 py-2 text-center rounded-lg 
+          transition duration-300 ease-in-out hover:bg-gray-600
+           text-white text-sm"
+                  >
+                    Sign up
+                  </button>
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* Is ko change karke apni logut wali functionality laga liye ga */}
+          {isAuth && (
+            <div className="place-self-end px-2">
+              <Link href="/login">
+                <button
+                  className="bg-blue-500 px-4 py-2 text-center rounded-lg 
+          transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
+                >
+                  Sign Out
+                </button>
+              </Link>
+            </div>
+          )}
 
           <button
             onClick={toggleMobileMenu} // Add onClick handler to toggle the mobile menu
