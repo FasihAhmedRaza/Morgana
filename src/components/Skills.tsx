@@ -1,19 +1,4 @@
-import React from 'react';
-import { Button } from './ui/button';
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
-import Dashboard from './Dashboard';
-
-
-function Skills() {
+export default function Skills() {
   return (
     <div className="lg:py-10 bg-black  p-4 py-3  ">
       <div className="flex flex-wrap bg-black justify-start lg:ml-40">
@@ -130,10 +115,7 @@ function Skills() {
             <span className="capitalize lg:inline leading-5">YouTube Content Creation</span>
           </span>
         </button>
-        {/* <button><a href="">booking Dashboard <Dashboard/> </a>  </button> */}
       </div>
     </div>
   );
 }
-
-export default Skills;

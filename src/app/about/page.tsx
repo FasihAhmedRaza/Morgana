@@ -1,8 +1,4 @@
-'use client'
-
-import { useState, useEffect } from 'react';
-
-function AboutUs() {
+export default function AboutUs() {
   // Data for each team member
   const teamMembers = [
     {
@@ -81,13 +77,6 @@ function AboutUs() {
     }
   ];
 
-  // State to track if client-side rendering has occurred
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   // Mission and Vision statements
   const missionStatement = "We are a software and consulting company dedicated to leveraging AI to create innovative solutions that add value to our clients' businesses. Our mission is to empower organizations with AI-driven insights and technologies, enabling them to thrive in the digital age.";
 
@@ -122,5 +111,3 @@ function AboutUs() {
     </div>
   );
 }
-
-export default AboutUs;

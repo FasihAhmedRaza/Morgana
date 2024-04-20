@@ -1,6 +1,6 @@
 "use client";
-import { CardStack } from "./ui/card-stack";
 import { cn } from "@/utils/cn";
+import { CardStack } from "./ui/card-stack";
 
 export function CardStackDemo() {
   return (

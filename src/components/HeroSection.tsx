@@ -1,23 +1,12 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { TextGenerateEffect } from "./ui/text-generate-effect";
 
 const words = `We specialize in crafting tailored strategies designed to propel
 people toward a brighter future. One strategy at a time.
 `;
+const TextGenerateEffect = dynamic(() => import("./ui/text-generate-effect"));
 
 const HeroSection = () => {
-  const [isClient, setIsClient] = useState(false);
-  const [showModel, setShowModel] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const handleGetStartedClick = () => {
-    setShowModel(true);
-  };
-
   return (
     <main className="dark:bg-black bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] py-10 md:py-20">
       <header className="h-5 sm:h-5 flex items-center z-30 w-full">
@@ -32,13 +21,16 @@ const HeroSection = () => {
                 VALUE FOR THE FUTURE
               </span>
             </h1>
-            <p className="text-sm sm:text-base mt-5">
-              {isClient && <TextGenerateEffect words={words} />}
-            </p>
+            <div className="text-sm sm:text-base mt-5">
+              {<TextGenerateEffect words={words} />}
+            </div>
             <div className="flex mt-8 gap-4">
-              <button className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white">
-                <Link href="/login">Get started</Link>
-              </button>
+              <Link
+                href="/login"
+                className="inline-flex w-full sm:w-auto h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:bg-slate-600 hover:text-white"
+              >
+                Get started
+              </Link>
 
               <Link
                 href="/about"

@@ -1,15 +1,48 @@
 "use client";
-import React from "react";
-import { useState } from "react";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { SlArrowDown } from "react-icons/sl";
 import useAuthStore from "../lib/authStore";
+import {
+  TEDropdown,
+  TEDropdownToggle,
+  TEDropdownMenu,
+  TEDropdownItem,
+  TERipple,
+} from "tw-elements-react";
 
 export const FloatingNav = () => {
   // State to track whether the mobile menu is open or closed
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isAuth } = useAuthStore();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOpenProfileDropdown, setIsOpenProfileDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Function to toggle the mobile menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpenProfileDropdown(false);
+      }
+    };
+
+    const handleDocumentClick = (event: MouseEvent) => {
+      handleClickOutside(event);
+    };
+
+    document.addEventListener("mousedown", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleDocumentClick);
+    };
+  }, [isOpenProfileDropdown]);
+
+  const toggleProfileDropdown = () => {
+    setIsOpenProfileDropdown(!isOpenProfileDropdown);
+  };
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -31,45 +64,49 @@ export const FloatingNav = () => {
 
           {/* --------------LOGIN BUTTON ---- */}
 
-          {!isAuth && (
-            <div>
+          {!isAuth ? (
+            <div className="flex flex-row justify-between">
               <div className="place-self-end px-2">
-                <Link href="/login">
-                  <button
-                    className="bg-blue-500 px-4 py-2 text-center rounded-lg 
-          transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
-                  >
-                    Login
-                  </button>
+                <Link
+                  href="/login"
+                  className="bg-blue-500 px-4 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white"
+                >
+                  Login
                 </Link>
               </div>
 
               <div className="place-self-end">
-                <Link href="/signup">
-                  <button
-                    className="bg-blue-500 px-2 py-2 text-center rounded-lg 
-          transition duration-300 ease-in-out hover:bg-gray-600
-           text-white text-sm"
-                  >
-                    Sign up
-                  </button>
+                <Link
+                  href="/signup"
+                  className="bg-blue-500 px-2 py-2 text-center rounded-lg transition duration-300 ease-in-out hover:bg-gray-600 text-white"
+                >
+                  Sign up
                 </Link>
               </div>
             </div>
-          )}
+          ) : (
+            <TEDropdown className="flex justify-center bg-blue-500 hover:bg-gray-600 text-white rounded">
+              <TEDropdownToggle className="flex whitespace-nowrap font-medium rounded focus:outline-none focus:ring-0 text-sm px-4 py-2.5 text-center items-center justify-between">
+                <span className="mr-1">Account</span>
+                <SlArrowDown />
+              </TEDropdownToggle>
 
-          {/* Is ko change karke apni logut wali functionality laga liye ga */}
-          {isAuth && (
-            <div className="place-self-end px-2">
-              <Link href="/login">
-                <button
-                  className="bg-blue-500 px-4 py-2 text-center rounded-lg 
-          transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
-                >
-                  Sign Out
-                </button>
-              </Link>
-            </div>
+              <TEDropdownMenu className="bg-[#000000] mt-1">
+                <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
+                  <Link
+                    href="#"
+                    className="bg-gray-900 block w-full min-w-[160px] cursor-pointer whitespace-nowrap px-4 py-2 text-sm text-left font-normal pointer-events-auto"
+                  >
+                    Bookings
+                  </Link>
+                </TEDropdownItem>
+                <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
+                  <button className="bg-gray-900 block w-full min-w-[160px] cursor-pointer whitespace-nowrap px-4 py-2 text-sm text-left font-normal pointer-events-auto">
+                    Sign Out
+                  </button>
+                </TEDropdownItem>
+              </TEDropdownMenu>
+            </TEDropdown>
           )}
 
           <button
