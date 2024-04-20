@@ -2,14 +2,13 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { SlArrowDown } from "react-icons/sl";
-import useAuthStore from "../lib/authStore";
 import {
   TEDropdown,
-  TEDropdownToggle,
-  TEDropdownMenu,
   TEDropdownItem,
-  TERipple,
+  TEDropdownMenu,
+  TEDropdownToggle
 } from "tw-elements-react";
+import useAuthStore from "../lib/authStore";
 
 export const FloatingNav = () => {
   // State to track whether the mobile menu is open or closed
@@ -94,10 +93,10 @@ export const FloatingNav = () => {
               <TEDropdownMenu className="bg-[#000000] mt-1">
                 <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
                   <Link
-                    href="#"
+                    href="/appointment"
                     className="bg-gray-900 block w-full min-w-[160px] cursor-pointer whitespace-nowrap px-4 py-2 text-sm text-left font-normal pointer-events-auto"
                   >
-                    Bookings
+                    Appointment
                   </Link>
                 </TEDropdownItem>
                 <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
