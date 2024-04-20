@@ -31,10 +31,6 @@ export const FloatingNav = () => {
 
           {/* --------------LOGIN BUTTON ---- */}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> af2e527 (create a global store, added example login api to set global data about the user.)
           {!isAuth && (
             <div>
               <div className="place-self-end px-2">
@@ -47,7 +43,6 @@ export const FloatingNav = () => {
                   </button>
                 </Link>
               </div>
-<<<<<<< HEAD
 
               <div className="place-self-end">
                 <Link href="/signup">
@@ -63,7 +58,7 @@ export const FloatingNav = () => {
             </div>
           )}
 
-{/* Is ko change karke apni logut wali functionality laga liye ga */}
+          {/* Is ko change karke apni logut wali functionality laga liye ga */}
           {isAuth && (
             <div className="place-self-end px-2">
               <Link href="/login">
@@ -76,61 +71,6 @@ export const FloatingNav = () => {
               </Link>
             </div>
           )}
-=======
-          <div className="place-self-end px-2">
-            <Link href="/login">
-              <button
-                className="bg-blue-500 px-4 py-2 text-center rounded-lg 
-              transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
-              >
-                Login
-              </button>
-            </Link>
-          </div>
-
-          {/*----------------- Signup BUTTON ---- */}
-          <div className="place-self-end">
-            <Link href="/signup">
-              <button
-                className="bg-blue-500 px-2 py-2 text-center rounded-lg 
-              transition duration-300 ease-in-out hover:bg-gray-600
-               text-white text-sm"
-              >
-                Sign up
-              </button>
-            </Link>
-          </div>
->>>>>>> 6f1bd39 (feat: password and reset password)
-=======
-
-              <div className="place-self-end">
-                <Link href="/signup">
-                  <button
-                    className="bg-blue-500 px-2 py-2 text-center rounded-lg 
-          transition duration-300 ease-in-out hover:bg-gray-600
-           text-white text-sm"
-                  >
-                    Sign up
-                  </button>
-                </Link>
-              </div>
-            </div>
-          )}
-
-{/* Is ko change karke apni logut wali functionality laga liye ga */}
-          {isAuth && (
-            <div className="place-self-end px-2">
-              <Link href="/login">
-                <button
-                  className="bg-blue-500 px-4 py-2 text-center rounded-lg 
-          transition duration-300 ease-in-out hover:bg-gray-600 text-white text-sm"
-                >
-                  Sign Out
-                </button>
-              </Link>
-            </div>
-          )}
->>>>>>> af2e527 (create a global store, added example login api to set global data about the user.)
 
           <button
             onClick={toggleMobileMenu} // Add onClick handler to toggle the mobile menu
