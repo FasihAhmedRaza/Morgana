@@ -6,6 +6,7 @@ import apiService from "@/utils/apiService";
 import { errorMessage, successMessage } from "@/utils/toastMessages";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import WithSuspenseBoundary from "./WithSuspenseBoundary";
 
 const ResetPassword = () => {
   const router = useRouter();
@@ -115,4 +116,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default WithSuspenseBoundary(ResetPassword);
