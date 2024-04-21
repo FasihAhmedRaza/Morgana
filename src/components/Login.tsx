@@ -1,15 +1,17 @@
 "use client";
 import { API_LOGIN } from "@/constants/api";
+import { useLoading } from "@/contexts/LoadingContext";
 import apiService from "@/utils/apiService";
+import { errorMessage, successMessage } from "@/utils/toastMessages";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useAuthStore from "../lib/authStore";
-import { errorMessage, successMessage } from "@/utils/toastMessages";
-import { useRouter } from "next/navigation";
 
 const Login = () => {
   const router = useRouter();
   const { setUserAuthentication, isAuth } = useAuthStore();
+  const { loading, setLoading } = useLoading();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,7 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuth) {
-      router.push("/appointment");
+      router.push("/");
     }
   }, [isAuth]);
 
@@ -31,17 +33,21 @@ const Login = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    setLoading(true);
     try {
       const result = await apiService.post(API_LOGIN, formData);
-      console.log("the res is ", result?.data);
-      successMessage("Logged in successfully");
-      setUserAuthentication(result?.data?.data);
+      if (result.ok) {
+        successMessage("Logged in successfully");
+        setUserAuthentication(result?.data?.data);
+      } else {
+        errorMessage(result.response.message);
+      }
     } catch (error) {
-      console.error("Error occurred:", error);
       errorMessage(
         "Failed to login. Please check your credentials and try again."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -109,8 +115,9 @@ const Login = () => {
             <button
               className="w-full text-white bg-blue-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center leading-7"
               type="submit"
+              disabled={loading}
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </div>
           {/* Sign up link */}

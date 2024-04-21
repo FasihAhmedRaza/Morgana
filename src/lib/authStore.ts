@@ -11,7 +11,6 @@ type StoreState = {
   accessToken: null | string;
   refreshToken: null | string;
   isAuth: boolean;
-  isDark: boolean;
 };
 
 type StoreAction = {
@@ -25,7 +24,6 @@ const initialState: StoreState = {
   userData: null,
   accessToken: null,
   refreshToken: null,
-  isDark: false,
 };
 
 const useAuthStore = create<StoreState & StoreAction>()(
@@ -44,7 +42,6 @@ const useAuthStore = create<StoreState & StoreAction>()(
           ...initialState,
         })),
       updateUserData: (payload: any) => set(() => ({ userData: payload })),
-
     }),
     {
       name: "PERSIST_STORE",
@@ -53,13 +50,11 @@ const useAuthStore = create<StoreState & StoreAction>()(
         accessToken,
         refreshToken,
         userData,
-        isDark,
       }) => ({
         isAuth,
         userData,
         accessToken,
         refreshToken,
-        isDark, 
       }),
     }
   )

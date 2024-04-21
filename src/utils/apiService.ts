@@ -47,7 +47,7 @@ const apiService = {
       header: response.headers,
       response: {
         code: response.status,
-        message: responseData?.error ?? responseData?.message,
+        message: responseData?.message ?? responseData?.error,
         errorCode: responseData?.statusCode,
       },
     };
@@ -70,19 +70,14 @@ const apiService = {
         data: !utilService.isEmpty(data) ? data : null,
       };
     }
-    if (response.status === 500) {
+
+    if (!response.ok) {
       return {
         ...mutatedResponse,
         data: !utilService.isEmpty(data) ? data : null,
       };
-    }
-    if (response.ok) {
-      return { ...mutatedResponse, data };
     } else {
-      return {
-        ...mutatedResponse,
-        data: !utilService.isEmpty(data) ? data : null,
-      };
+      return { ...mutatedResponse, data };
     }
   },
 };

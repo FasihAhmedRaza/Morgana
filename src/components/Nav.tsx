@@ -14,20 +14,20 @@ import useAuthStore from "../lib/authStore";
 export const FloatingNav = () => {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const { isAuth, removeUserAuthentication } = useAuthStore();
+  const [isAuth, setIsAuth] = useState(false);
+  const { isAuth: isAuthFromStore, removeUserAuthentication } = useAuthStore();
 
   useEffect(() => {
-    setIsUserLoggedIn(isAuth)
-  }, [isAuth]);
+    setIsAuth(isAuthFromStore);
+  }, [isAuthFromStore]);
 
   const logoutSuccess = () => {
     removeUserAuthentication();
-    router.push("/login");
+    window.location.href = "/login"
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
   return (
@@ -43,14 +43,14 @@ export const FloatingNav = () => {
         <div className="flex items-center lg:order-2">
           {/* --------------LOGIN BUTTON ---- */}
 
-          {isUserLoggedIn ? (
+          {isAuth ? (
             <TEDropdown className="flex justify-center bg-blue-500 hover:bg-gray-600 text-white rounded">
               <TEDropdownToggle className="flex whitespace-nowrap font-medium rounded focus:outline-none focus:ring-0 text-sm px-4 py-2.5 text-center items-center justify-between">
                 <span className="mr-1">Account</span>
                 <SlArrowDown />
               </TEDropdownToggle>
 
-              <TEDropdownMenu className="bg-[#0000FF] border-[#0000FF] mt-1">
+              <TEDropdownMenu className="bg-[#0000FF] mt-1">
                 <TEDropdownItem className="bg-gray-900 text-white border-gray-900">
                   <Link
                     href="/appointment"
@@ -97,11 +97,11 @@ export const FloatingNav = () => {
             type="button"
             className="inline-flex items-center p-2 ml-1 text-sm text-black rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="mobile-menu-2"
-            aria-expanded={isMobileMenuOpen ? "true" : "false"} // Set aria-expanded based on menu state
+            aria-expanded={isMobileMenuOpen ? "true" : "false"} 
           >
             <span className="sr-only">Open main menu</span>
             <svg
-              className={`w-6 h-6 ${isMobileMenuOpen ? "hidden" : ""}`} // Hide the open menu icon if menu is open
+              className={`w-6 h-6 ${isMobileMenuOpen ? "hidden" : ""}`}
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"

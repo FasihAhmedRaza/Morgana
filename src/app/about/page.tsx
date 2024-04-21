@@ -2,42 +2,7 @@ export default function AboutUs() {
   // Data for each team member
   const teamMembers = [
     {
-      name: "Zeus",
-      role: "Chairman and CEO",
-      bio: "Texas Tech alumnus with a Master of Business Administration and a Master of Science in Data Science. Over 5 years of professional experience as a Data Scientist building data science systems for the public and private sector. Specializes in Data Science, Business Administration, AI Consulting, and Licensing Solutions.",
-      skills: [
-        "Data Science",
-        "Business Administration",
-        "AI Consulting",
-        "Licensing Solutions"
-      ]
-    },
-    {
-      name: "Hades",
-      role: "Chief Operations Officer",
-      bio: "Bringing over 15 years of experience in developing custom software and machine learning solutions, Maurice T., a Texas Tech alumnus with an MBA and an M.S. in Data Science, has expertise in real estate, blockchain technology, and machine learning.",
-      skills: [
-        "Software Development",
-        "Machine Learning",
-        "Real Estate",
-        "Blockchain Technology"
-      ]
-    },
-    {
-      name: "Poseidon",
-      role: "Chief Technology Officer",
-      bio: "With over 10 years of experience in developing custom software and PyTorch Large Language Models, Max D. provides educational content on developing Large Language Models through courses and YouTube videos. His expertise lies in Software Development, PyTorch, Large Language Models, Course Development, and YouTube Content Creation.",
-      skills: [
-        "Software Development",
-        "PyTorch",
-        "Large Language Models",
-        "Course Development",
-        "YouTube Content Creation"
-      ]
-    },
-
-    {
-      name: "Maurice T.",
+      name: "Maurice Thomas",
       role: "Data Scientist",
       bio: "Maurice T., a Texas Tech alumnus with an MBA and a Master of Science in Data Science, brings over 5 years of experience in building Data Science systems for both public and private sector clients.",
       skills: [
@@ -48,7 +13,7 @@ export default function AboutUs() {
       ]
     },
     {
-      name: "Max D.",
+      name: "Max Dublenko",
       role: "Software Developer and Machine Learning Engineer",
       bio: "With over 10 years of experience, Max D. specializes in developing custom software and machine learning solutions, delivering innovative solutions to various industries.",
       skills: [
@@ -59,7 +24,7 @@ export default function AboutUs() {
       ]
     },
     {
-      name: "Elliot A.",
+      name: "Elliot Arledge",
       role: "Software Engineer and Machine Learning Specialist",
       bio: "Elliot A. has over 5 years of experience developing custom software and machine learning solutions using JavaScript, Python, AWS Cloud Computing, ReactJS, NodeJS, PyTorch, and Docker. He is proficient in developing across multiple operating systems including Windows, MacOS, and LinuxOS.",
       skills: [
@@ -78,7 +43,7 @@ export default function AboutUs() {
   ];
 
   // Mission and Vision statements
-  const missionStatement = "We are a software and consulting company dedicated to leveraging AI to create innovative solutions that add value to our clients' businesses. Our mission is to empower organizations with AI-driven insights and technologies, enabling them to thrive in the digital age.";
+  const missionStatement = "We are a software and consulting company dedicated to leveraging AI to create interactive solutions that add value for clients. Our mission is to empower clients with AI-driven insights and technology, enabling them to thrive in the digital age and create value for the future.";
 
 
   return (

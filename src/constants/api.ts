@@ -4,3 +4,7 @@ export const API_LOGIN = "/auth/login";
 export const API_SIGNUP = "/auth/signin";
 export const API_FORGET_PASSWORD = "/auth/forget-password";
 export const API_RESET_PASSWORD = "/auth/reset-password";
+
+export const API_BOOKINGS_SLOTS = "/bookings/slots";
+export const API_BOOKINGS = "/bookings";
+

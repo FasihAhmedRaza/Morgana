@@ -1,9 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-const words = `We specialize in crafting tailored strategies designed to propel
-people toward a brighter future. One strategy at a time.
-`;
+const words = `We are a software and consulting company dedicated to leveraging AI to create interactive solutions that add value for clients. Our mission is to empower clients with AI-driven insights and technology, enabling them to thrive in the digital age and create value for the future.`;
 const TextGenerateEffect = dynamic(() => import("./ui/text-generate-effect"));
 
 const HeroSection = () => {

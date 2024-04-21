@@ -1,59 +1,74 @@
 "use client";
 
-import axios from "axios";
+import { API_BOOKINGS_SLOTS } from "@/constants/api";
+import useAuthStore from "@/lib/authStore";
+import apiService from "@/utils/apiService";
+import { errorMessage } from "@/utils/toastMessages";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CountriesDropdown from "./CountriesDropDown";
 import isAuth from "./IsAuth";
 import Table from "./Table";
+import { useSearchParams } from "next/navigation";
 
 const Appointment = () => {
+  const [dateTimeSlot, setDateTimeSlot] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [data, setData] = useState<any[]>([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [dateSet, setDataSet] = useState<any[]>([]);
+  const searchParams = useSearchParams();
+  const { accessToken } = useAuthStore();
+  const [formData, setFormData] = useState({
+    startDate: "",
+    endDate: "",
+    country: "",
+    city: "",
+    address: "",
+    subscriptionPlanId: "",
+  });
 
   useEffect(() => {
-    setData([])
-  }, [])
+    setDataSet([]);
+    formData.subscriptionPlanId = searchParams.get("planId") || "";
+  }, [selectedDate, formData]);
 
-  const handleCountryChange = (e: any) => {
-    setSelectedCountry(e.target.value);
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    console.log("🚀 ~ handleChange ~ name:", formData);
   };
 
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleDateChange = (date: any) => {
+  const handleDateChange = async (date: any) => {
     setSelectedDate(date);
-    // Make API request when date is selected
-    fetchData(date);
-  };
-
-  const fetchData = (date: any) => {
-    axios
-      .get(`your_api_endpoint?date=${date.toISOString()}`)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  };
-
-  const handleOptionChange = (option: any) => {
-    setSelectedOption(option);
+    try {
+      const result = await apiService.get(
+        `${API_BOOKINGS_SLOTS}?forDate=${date}`,
+        {
+          token: accessToken,
+        }
+      );
+      if (result.ok) {
+        setDataSet(result?.data?.data);
+      } else {
+        errorMessage(result.response.message);
+      }
+    } catch (error) {
+      errorMessage(error);
+    }
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
     // Here you can send selectedDate and selectedOption to the backend
     console.log("Selected Date:", selectedDate);
-    console.log("Selected Option:", selectedOption);
   };
 
   return (
-    <div className="flex overflow-x-hidden">
-      <div className="w-1/2 p-2 min-h-screen">
+    <div className="flex flex-wrap overflow-x-hidden">
+      <div className="w-full sm:w-1/2 p-2 min-h-screen">
         <div className="p-2">
           <div className="w-full mb-3">
             <label
@@ -78,20 +93,30 @@ const Appointment = () => {
                 className="block py-2 text-sm font-medium leading-5 text-gray-200"
                 htmlFor="name"
               >
-                {data?.length
+                {dateSet?.length
                   ? "Select Time Slot"
                   : "Please pick a date to choose a time slot"}
               </label>
-              {data?.map((item) => (
-                <div key={item.id}>
+              {dateSet?.map((item, index) => (
+                <div key={`${index}-date`}>
                   <input
                     type="radio"
-                    id={item.id}
-                    value={item.id}
-                    checked={selectedOption === item.id}
-                    onChange={() => handleOptionChange(item.id)}
+                    id={`${index}-date`}
+                    value={index}
+                    checked={dateTimeSlot === index}
+                    onChange={() => {
+                      setDateTimeSlot(index);
+                      const selectedSlot = dateSet[index];
+                      setFormData({
+                        ...formData,
+                        startDate: selectedSlot.startTime,
+                        endDate: selectedSlot.endTime,
+                      });
+                    }}
                   />
-                  <label htmlFor={item.id}>{item.id}</label>
+                  <label htmlFor={`${index}-date`}>
+                    {item.startTime} {item.endTime}
+                  </label>
                 </div>
               ))}
             </div>
@@ -104,8 +129,8 @@ const Appointment = () => {
                 Country
               </label>
               <CountriesDropdown
-                value={selectedCountry}
-                onChange={handleCountryChange}
+                value={formData.country}
+                onChange={handleChange}
                 className="bg-gray-100 border border-gray-300 text-gray-900 text-base py-3 px-6 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
@@ -118,8 +143,10 @@ const Appointment = () => {
               </label>
               <input
                 className="bg-gray-100 border border-gray-300 text-gray-900 text-base py-3 px-6 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
-                defaultValue=""
+                defaultValue={formData.city}
+                onChange={handleChange}
                 id="city"
+                name="city"
                 placeholder="Your city"
                 required
                 type="text"
@@ -134,8 +161,10 @@ const Appointment = () => {
               </label>
               <input
                 className="bg-gray-100 border border-gray-300 text-gray-900 text-base py-3 px-6 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
-                defaultValue=""
+                defaultValue={formData.address}
+                onChange={handleChange}
                 id="address"
+                name="address"
                 placeholder="Your address"
                 required
                 type="text"
@@ -150,7 +179,7 @@ const Appointment = () => {
           </form>
         </div>
       </div>
-      <div className="w-1/2 p-2 min-h-screen">
+      <div className="w-full sm:w-1/2 p-2 min-h-screen">
         <h2 className="text-center my-2">Past Bookings</h2>
         <Table />
       </div>

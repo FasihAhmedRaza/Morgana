@@ -17,6 +17,7 @@ const CountriesDropdown = ({
 
   return (
     <select
+      name="country"
       value={value}
       onChange={onChange}
       className={dropdownClassName}
@@ -24,7 +25,7 @@ const CountriesDropdown = ({
     >
       <option value="">Select Country</option>
       {COUNTRIES.map((country) => (
-        <option key={country.code} value={country.code}>
+        <option key={country.code} value={country.name}>
           {country.name}
         </option>
       ))}

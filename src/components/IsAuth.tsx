@@ -1,20 +1,21 @@
 "use client";
-import { useEffect } from "react";
-import { redirect } from "next/navigation";
 import useAuthStore from "@/lib/authStore";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function isAuth(Component: any) {
   return function IsAuth(props: any) {
+    const router = useRouter();
     const { isAuth: isUserLoggedIn } = useAuthStore();
 
     useEffect(() => {
       if (!isUserLoggedIn) {
         return redirect("/login");
       }
-    }, []);
+    }, [isUserLoggedIn, router]);
 
-    if (!isUserLoggedIn) {
-      return redirect("/login");
+    if (!isUserLoggedIn && !router) {
+      return <Component {...props} />;
     }
 
     return <Component {...props} />;

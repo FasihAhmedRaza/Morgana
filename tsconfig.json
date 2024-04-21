@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Model.jsx", "src/components/Signup.jsx", "src/components/login.jsx", "src/components/nava.jsx", "src/components/CookieModal.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Model.jsx", "src/components/Signup.tsx", "src/components/login.jsx", "src/components/nava.jsx", "src/components/CookieModal.jsx"],
   "exclude": ["node_modules"]
 }
