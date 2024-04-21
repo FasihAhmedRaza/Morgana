@@ -10,13 +10,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import CountriesDropdown from "./CountriesDropDown";
 import isAuth from "./IsAuth";
 import Table from "./Table";
-import { useSearchParams } from "next/navigation";
 
 const Appointment = () => {
   const [dateTimeSlot, setDateTimeSlot] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
   const [dateSet, setDataSet] = useState<any[]>([]);
-  const searchParams = useSearchParams();
   const { accessToken } = useAuthStore();
   const [formData, setFormData] = useState({
     startDate: "",
@@ -24,12 +22,10 @@ const Appointment = () => {
     country: "",
     city: "",
     address: "",
-    subscriptionPlanId: "",
   });
 
   useEffect(() => {
     setDataSet([]);
-    formData.subscriptionPlanId = searchParams.get("planId") || "";
   }, [selectedDate, formData]);
 
   const handleChange = (e: any) => {

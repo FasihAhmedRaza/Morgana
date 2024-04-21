@@ -35,7 +35,7 @@ export const FloatingNav = () => {
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
         <Link href="/" className="flex items-center">
           <img
-            src="courses/logo.png"
+            src="/courses/logo.png"
             className="h-6 mr-3 sm:h-9"
             alt="Landwind Logo"
           />

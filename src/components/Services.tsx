@@ -1,16 +1,38 @@
 "use client";
+import { API_SUBSCRIPTION } from "@/constants/api";
 import { PAYPAL_SUBSCRIPTION_PLANS } from "@/constants/plans";
+import apiService from "@/utils/apiService";
+import { errorMessage } from "@/utils/toastMessages";
+import { useEffect, useState } from "react";
 import useAuthStore from "../lib/authStore";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
 
 const Services = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const { isAuth: isAuthFromStore } = useAuthStore();
+  const { isAuth: isAuthFromStore, accessToken, userData } = useAuthStore();
 
   useEffect(() => {
     setIsAuth(isAuthFromStore);
   }, [isAuthFromStore]);
+
+  const handleOnClick = async (e: any, pId: string) => {
+    if (isAuth) {
+      try {
+        const result = await apiService.get(
+          `${API_SUBSCRIPTION}?planId=${pId}`,
+          {
+            token: accessToken,
+          }
+        );
+        if (result.ok) {
+          window.location.href = result?.data?.data["links"][1]?.href;
+        } else {
+          errorMessage(result.response.message);
+        }
+      } catch (error) {
+        errorMessage(error);
+      }
+    }
+  };
 
   return (
     <section className="bg-black py-12">
@@ -68,25 +90,23 @@ const Services = () => {
                         : "Up to five half-hour"}
                     </span>
                   </li>
-                  {planKey !== "starter" && (
-                    <li className="flex items-center">
-                      <svg
-                        className="h-6 w-6 text-green-500 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M5 13l4 4L19 7"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                      <span>Video Appointments</span>
-                    </li>
-                  )}
+                  <li className="flex items-center">
+                    <svg
+                      className="h-6 w-6 text-green-500 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 13l4 4L19 7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                    <span>Video Appointments</span>
+                  </li>
                   {planKey !== "starter" && (
                     <li className="flex items-center">
                       <svg
@@ -107,15 +127,18 @@ const Services = () => {
                     </li>
                   )}
                 </ul>
-                <Link
-                  href={{
-                    pathname: "/appointment",
-                    query: `planId=${plan.id}`,
-                  }}
+                <button
+                  onClick={(e) => handleOnClick(e, plan.id)}
+                  id={planKey}
                   className="block w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+                  disabled={userData?.currentSubscription?.planId === plan.id}
                 >
-                  {isAuth ? "Get Started" : "Login to Get Started"}
-                </Link>
+                  {userData?.currentSubscription?.planId === plan.id
+                    ? "Active Plan"
+                    : isAuth
+                    ? "Get Started"
+                    : "Login to Get Started"}
+                </button>
               </div>
             );
           })}

@@ -7,4 +7,5 @@ export const API_RESET_PASSWORD = "/auth/reset-password";
 
 export const API_BOOKINGS_SLOTS = "/bookings/slots";
 export const API_BOOKINGS = "/bookings";
+export const API_SUBSCRIPTION = "/subscriptions";
 
