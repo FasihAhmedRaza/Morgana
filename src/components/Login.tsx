@@ -39,6 +39,10 @@ const Login = () => {
       if (result.ok) {
         successMessage("Logged in successfully");
         setUserAuthentication(result?.data?.data);
+        setFormData({
+          email: "",
+          password: "",
+        });
       } else {
         errorMessage(result.response.message);
       }

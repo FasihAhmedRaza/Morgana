@@ -37,6 +37,9 @@ const ForgotPassword = () => {
     try {
       const result = await apiService.post(API_FORGET_PASSWORD, formData);
       if (result.ok) {
+        setFormData({
+          email: "",
+        })
         const userId: any = result?.data?.data;
         router.push(`/reset-password?userId=${userId}`);
       } else {

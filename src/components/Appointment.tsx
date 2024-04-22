@@ -1,9 +1,9 @@
 "use client";
 
-import { API_BOOKINGS_SLOTS } from "@/constants/api";
+import { API_BOOKINGS, API_BOOKINGS_SLOTS } from "@/constants/api";
 import useAuthStore from "@/lib/authStore";
 import apiService from "@/utils/apiService";
-import { errorMessage } from "@/utils/toastMessages";
+import { errorMessage, successMessage } from "@/utils/toastMessages";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,11 +11,13 @@ import CountriesDropdown from "./CountriesDropDown";
 import isAuth from "./IsAuth";
 import Table from "./Table";
 import { formatTime } from "@/lib/utils";
+import { useLoading } from "@/contexts/LoadingContext";
 
 const Appointment = () => {
   const [dateTimeSlot, setDateTimeSlot] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [dateSet, setDataSet] = useState<any[]>([]);
+  const { loading, setLoading } = useLoading();
   const { accessToken } = useAuthStore();
   const [formData, setFormData] = useState({
     startDate: "",
@@ -37,7 +39,6 @@ const Appointment = () => {
       ...prevState,
       [name]: value,
     }));
-    console.log("🚀 ~ handleChange ~ name:", formData);
   };
 
   const handleDateChange = async (date: Date) => {
@@ -45,7 +46,7 @@ const Appointment = () => {
     setDateTimeSlot(null);
     try {
       const result = await apiService.get(
-        `${API_BOOKINGS_SLOTS}?forDate=${date}`,
+        `${API_BOOKINGS_SLOTS}?forDate=${date.toISOString()}`,
         {
           token: accessToken,
         }
@@ -70,10 +71,33 @@ const Appointment = () => {
     });
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     // Here you can send selectedDate and selectedOption to the backend
-    console.log("Selected Date:", selectedDate);
+    console.log("Selected Date:", formData);
+
+    setLoading(true);
+    try {
+      const result = await apiService.post(API_BOOKINGS, formData, {
+        token: accessToken,
+      });
+      if (result.ok) {
+        successMessage("Your appointment has been successfully placed.");
+        setFormData({
+          startDate: "",
+          endDate: "",
+          country: "",
+          city: "",
+          address: "",
+        });
+      } else {
+        errorMessage(result.response.message);
+      }
+    } catch (error) {
+      errorMessage(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -107,16 +131,38 @@ const Appointment = () => {
                   Select Time Slot
                 </label>
                 {dateSet.map((item, index) => (
-                  <div key={`${index}-date`}>
+                  <div
+                    key={`${index}-date`}
+                    className="flex items-center space-x-2"
+                  >
                     <input
                       type="radio"
                       id={`${index}-date`}
                       value={index}
                       checked={dateTimeSlot === index}
                       onChange={(e) => handleTimeSlotChange(e, index)}
+                      className="hidden"
                     />
-                    <label htmlFor={`${index}-date`}>
-                      {"  "} {formatTime(item.startTime)} - {formatTime(item.endTime)}
+                    <label htmlFor={`${index}-date`} className="cursor-pointer">
+                      <div className="relative flex items-center">
+                        <div
+                          className={`w-4 h-4 border-2 rounded-full transition-colors ${
+                            dateTimeSlot === index
+                              ? "bg-blue-500 border-blue-500"
+                              : "border-gray-400"
+                          }`}
+                        ></div>
+                        <div className="ml-2">
+                          <span className="text-white transition-colors hover:text-blue-300 focus:text-blue-300 focus:outline-none">
+                            {formatTime(item.startTime)}
+                          </span>
+                          <span className="mx-1 text-gray-400">-</span>
+                          <span className="text-white transition-colors hover:text-blue-300 focus:text-blue-300 focus:outline-none">
+                            {formatTime(item.endTime)}
+                          </span>
+                          <span className="mx-2 text-gray-400">UTC</span>
+                        </div>
+                      </div>
                     </label>
                   </div>
                 ))}
@@ -181,7 +227,7 @@ const Appointment = () => {
               type="submit"
               className="w-full text-white bg-blue-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center leading-7"
             >
-              Book My Appointment
+              {loading ? "Booking ..." : "Book My Appointment"}
             </button>
           </form>
         </div>

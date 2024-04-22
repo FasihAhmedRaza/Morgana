@@ -46,6 +46,12 @@ const Signup = () => {
       if (result.ok) {
         successMessage("Your account has been successfully created.");
         setUserAuthentication(result?.data?.data);
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          termsAndConditions: false,
+        })
       } else {
         errorMessage(result.response.message);
       }

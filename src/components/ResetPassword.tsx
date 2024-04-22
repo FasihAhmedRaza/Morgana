@@ -40,6 +40,11 @@ const ResetPassword = () => {
     try {
       const result = await apiService.post(API_RESET_PASSWORD, formData);
       if (result.ok) {
+        setFormData({
+          userId: searchParams.get("userId") ?? null,
+          password: "",
+          confirmPassword: "",
+        });
         router.push("/login");
         successMessage("Password has been successfully changed!");
       } else {
