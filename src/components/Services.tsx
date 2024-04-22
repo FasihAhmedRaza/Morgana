@@ -24,7 +24,10 @@ const Services = () => {
           }
         );
         if (result.ok) {
-          window.location.href = result?.data?.data["links"][1]?.href;
+          window.location.href =
+            PAYPAL_SUBSCRIPTION_PLANS["starter"].id === pId
+              ? result?.data?.data["links"][1]?.href
+              : result?.data?.data["links"][0]?.href;
         } else {
           errorMessage(result.response.message);
         }
