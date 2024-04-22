@@ -1,13 +1,7 @@
-import type { Config } from "tailwindcss"
-
-
+import type { Config } from "tailwindcss";
 
 const svgToDataUri = require("mini-svg-data-uri");
-const colors = require("tailwindcss/colors");
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
-
+const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
 
 // Plugin to add each Tailwind color as a global CSS variable
 function addVariablesForColors({ addBase, theme }: any) {
@@ -15,7 +9,6 @@ function addVariablesForColors({ addBase, theme }: any) {
   const newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, value]) => [`--${key}`, value])
   );
-
   addBase({
     ':root': newVars,
   });
@@ -44,21 +37,14 @@ function addSvgPatterns({ matchUtilities, theme }: any) {
   );
 }
 
-
-
-
-
-
-
-
-const config = {
-  darkMode: ["class"],
+const config: Config = {
+  darkMode: "class",
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -124,9 +110,12 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-    
   },
-  plugins: [require("tailwindcss-animate"),addVariablesForColors, addSvgPatterns,addVariablesForColors,],
-} satisfies Config
+  plugins: [
+    require("tailwindcss-animate"),
+    addVariablesForColors,
+    addSvgPatterns,
+  ],
+};
 
-export default config
+export default config;
