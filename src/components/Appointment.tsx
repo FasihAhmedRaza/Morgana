@@ -29,7 +29,7 @@ const Appointment = () => {
     if (selectedDate && formData.startDate === "" && formData.endDate === "") {
       setDataSet([]);
     }
-  }, [selectedDate, formData]);
+  }, [selectedDate]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -181,7 +181,7 @@ const Appointment = () => {
               type="submit"
               className="w-full text-white bg-blue-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center leading-7"
             >
-              Continue To Payment
+              Book My Appointment
             </button>
           </form>
         </div>
