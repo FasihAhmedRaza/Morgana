@@ -10,10 +10,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import CountriesDropdown from "./CountriesDropDown";
 import isAuth from "./IsAuth";
 import Table from "./Table";
+import { formatTime } from "@/lib/utils";
 
 const Appointment = () => {
-  const [dateTimeSlot, setDateTimeSlot] = useState(0);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [dateTimeSlot, setDateTimeSlot] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [dateSet, setDataSet] = useState<any[]>([]);
   const { accessToken } = useAuthStore();
   const [formData, setFormData] = useState({
@@ -25,7 +26,9 @@ const Appointment = () => {
   });
 
   useEffect(() => {
-    setDataSet([]);
+    if (selectedDate && formData.startDate === "" && formData.endDate === "") {
+      setDataSet([]);
+    }
   }, [selectedDate, formData]);
 
   const handleChange = (e: any) => {
@@ -37,8 +40,9 @@ const Appointment = () => {
     console.log("🚀 ~ handleChange ~ name:", formData);
   };
 
-  const handleDateChange = async (date: any) => {
+  const handleDateChange = async (date: Date) => {
     setSelectedDate(date);
+    setDateTimeSlot(null);
     try {
       const result = await apiService.get(
         `${API_BOOKINGS_SLOTS}?forDate=${date}`,
@@ -54,6 +58,16 @@ const Appointment = () => {
     } catch (error) {
       errorMessage(error);
     }
+  };
+
+  const handleTimeSlotChange = (e: any, index: number) => {
+    setDateTimeSlot(index);
+    const selectedSlot = dateSet[index];
+    setFormData({
+      ...formData,
+      startDate: selectedSlot.startTime,
+      endDate: selectedSlot.endTime,
+    });
   };
 
   const handleSubmit = (event: any) => {
@@ -84,38 +98,35 @@ const Appointment = () => {
             />
           </div>
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label
-                className="block py-2 text-sm font-medium leading-5 text-gray-200"
-                htmlFor="name"
-              >
-                {dateSet?.length
-                  ? "Select Time Slot"
-                  : "Please pick a date to choose a time slot"}
-              </label>
-              {dateSet?.map((item, index) => (
-                <div key={`${index}-date`}>
-                  <input
-                    type="radio"
-                    id={`${index}-date`}
-                    value={index}
-                    checked={dateTimeSlot === index}
-                    onChange={() => {
-                      setDateTimeSlot(index);
-                      const selectedSlot = dateSet[index];
-                      setFormData({
-                        ...formData,
-                        startDate: selectedSlot.startTime,
-                        endDate: selectedSlot.endTime,
-                      });
-                    }}
-                  />
-                  <label htmlFor={`${index}-date`}>
-                    {item.startTime} {item.endTime}
-                  </label>
-                </div>
-              ))}
-            </div>
+            {dateSet.length > 0 ? (
+              <div className="mb-3">
+                <label
+                  className="block py-2 text-sm font-medium leading-5 text-gray-200"
+                  htmlFor="name"
+                >
+                  Select Time Slot
+                </label>
+                {dateSet.map((item, index) => (
+                  <div key={`${index}-date`}>
+                    <input
+                      type="radio"
+                      id={`${index}-date`}
+                      value={index}
+                      checked={dateTimeSlot === index}
+                      onChange={(e) => handleTimeSlotChange(e, index)}
+                    />
+                    <label htmlFor={`${index}-date`}>
+                      {"  "} {formatTime(item.startTime)} - {formatTime(item.endTime)}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-400">
+                Please pick a date to choose a time slot
+              </p>
+            )}
+
             {/* Other form fields */}
             <div className="mb-3">
               <label

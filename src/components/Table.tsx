@@ -10,9 +10,9 @@ export default function Table() {
               <thead className="border-b font-medium dark:border-neutral-500">
                 <tr>
                   <th scope="col" className="px-6 py-4">#</th>
-                  <th scope="col" className="px-6 py-4">First</th>
-                  <th scope="col" className="px-6 py-4">Last</th>
-                  <th scope="col" className="px-6 py-4">Handle</th>
+                  <th scope="col" className="px-6 py-4">Start Time</th>
+                  <th scope="col" className="px-6 py-4">End Time</th>
+                  <th scope="col" className="px-6 py-4">Plan</th>
                 </tr>
               </thead>
               <tbody>
